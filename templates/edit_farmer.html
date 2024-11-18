@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="rw">
+{% load static %}
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+<meta name="description" content="POS - Bootstrap Admin Template">
+<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, html5, responsive">
+<meta name="author" content="Dreamguys - Bootstrap Admin Template">
+<meta name="robots" content="noindex, nofollow">
+<title>IHURIRO RY'ABOROZI BA GAHINI (GAFCO)</title>
+
+<link rel="shortcut icon" type="{% static 'image/x-icon' %}" href="assets/img/favicon.jpg">
+
+<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/dataTables.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/all.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+<div id="global-loader">
+<div class="whirly-loader"></div>
+</div>
+
+<div class="main-wrapper">
+
+{% include 'navbar.html' %}
+
+<div class="page-wrapper">
+<div class="content">
+    <div class="container">
+        <h2>Hindura Umworozi</h2>
+        {% for farmer in farmer1 %}
+        <form action="" method="POST">
+            <!-- CSRF token for security (Django specific) -->
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+            {% comment %} <div class="form-group">
+                <label for="username">Izina ry'Inyandiko</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div> {% endcomment %}
+            <div class="form-group">
+                <label for="first_name">Izina Rya Mbere</label>
+                <input type="text" class="form-control" value="{{ farmer.first_name }}" id="first_name" name="first_name" required>
+            </div>
+            <div class="form-group">
+                <label for="last_name">Izina Rya Kabiri</label>
+                <input type="text" class="form-control" value="{{ farmer.last_name }}" id="last_name" name="last_name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Imeyili</label>
+                <input type="email" class="form-control" value="{{ farmer.email }}" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Telefone</label>
+                <input type="text" class="form-control" id="phone" value="{{ farmer.phone }}" name="phone" maxlength="10" required>
+            </div>
+            <script>
+                // JavaScript to limit input length to 10 characters
+                document.getElementById('phone').addEventListener('input', function () {
+                    if (this.value.length > 10) {
+                        this.value = this.value.slice(0, 10); // Truncate input to 10 characters
+                    }
+                });
+            </script>
+            {% comment %} <div class="form-group">
+                <label for="password">Ijambo Ry'Ibanga</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div> {% endcomment %}
+            <div class="form-group">
+                <label for="category">Icyiciro</label>
+                {% comment %} <input type="text" class="form-control" id="category" name="category" required> {% endcomment %}
+                <select class="form-control" id="gender" name="category" required>
+                    <option value="farmer">Umworozi</option>
+                    {% comment %} <option value="staff">Umukozi</option> {% endcomment %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="gender">Igitsina</label>
+                <select class="form-control" id="gender" name="gender" required>
+                    <option value="{{ farmer.gender }}">{{ farmer.gender }}</option>
+                    <option value="Female">Gore</option>
+                    <option value="Male">Gabo</option>
+                    <option value="Other">Ibindi</option>
+                </select>
+            </div>
+            <input type="hidden" name="id1" value="{{ farmer.id }}">
+
+            <button type="submit" class="btn btn-primary">Emeza</button>
+        </form>
+        {% endfor %}
+    </div>
+</div>
+</div>
+
+<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'assets/js/feather.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery.slimscroll.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'assets/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/plugins/apexchart/apexcharts.min.js' %}"></script>
+<script src="{% static 'assets/plugins/apexchart/chart-data.js' %}"></script>
+<script src="{% static 'assets/js/script.js' %}"></script>
+</body>
+</html>

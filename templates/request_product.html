@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+<meta name="description" content="POS - Bootstrap Admin Template">
+<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern,  html5, responsive">
+<meta name="author" content="Dreamguys - Bootstrap Admin Template">
+<meta name="robots" content="noindex, nofollow">
+<title>GAHINI FARMER'S CO-OPERATIVE ( GAFCO)</title>
+
+<link rel="shortcut icon" type="{% static 'image/x-icon" href="assets/img/favicon.jpg'%}">
+
+<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css'%}">
+
+<link rel="stylesheet" href="{% static 'assets/css/animate.css'%}">
+
+<link rel="stylesheet" href="{% static 'assets/css/dataTables.bootstrap4.min.css'%}">
+
+<link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/fontawesome.min.css'%}">
+<link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/all.min.css'%}">
+
+<link rel="stylesheet" href="{% static 'assets/css/style.css'%}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+<div id="global-loader">
+<div class="whirly-loader"> </div>
+</div>
+
+<div class="main-wrapper">
+
+{% include 'navbar.html'%}
+
+<div class="page-wrapper">
+<div class="content">
+    <div class="container">
+        <h2>Request Products</h2>
+        <form action="" method="POST">
+
+            <!-- CSRF token for security (Django specific) -->
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+            <div class="form-group">
+                <label for="gender">Select Farmer</label>
+                <select class="form-control" id="farmer" name="farmer" required>
+                    {%for user in users %}
+                    <option value="{{user.id}}">{{user.first_name}} {{user.last_name}}</option>
+                    {% endfor %}                   
+                </select>
+
+            </div>
+                        <div class="form-group">
+                <label for="gender">Product Name</label>
+                <select class="form-control" id="product" name="product_name" required>
+                    {% for product in products %}
+                        <option value="{{ product.id }}" data-price-unit="{{ product.price_unit }}">{{ product.product_name }}</option>
+                    {% endfor %}
+                </select>
+                <p id="price-unit"></p>
+                
+                <div class="form-group">
+                    <label for="quantities">Quantities farmer want</label>
+                    <input type="number" class="form-control" id="quantities" name="quantities" required>
+                    <p id="total-price">Total price:</p>
+                </div>
+                
+
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    {% if success %}
+    <script>
+        Swal.fire({
+            title: 'Success!',
+            text: 'Product added successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    {% endif %}
+</div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const productSelect = document.getElementById('product');
+        const priceUnitDisplay = document.getElementById('price-unit');
+        const quantityInput = document.getElementById('quantities');
+        const totalPriceDisplay = document.getElementById('total-price');
+    
+        // Function to get the price unit of the selected product
+        function getPriceUnit() {
+            const selectedOption = productSelect.options[productSelect.selectedIndex];
+            return parseFloat(selectedOption.getAttribute('data-price-unit')) || 0;
+        }
+    
+        // Function to update the price unit display
+        function updatePriceUnit() {
+            const priceUnit = getPriceUnit();
+            priceUnitDisplay.textContent = priceUnit ? `Price Unit: ${priceUnit}` : '';
+            updateTotalPrice();
+        }
+    
+        // Function to update the total price display
+        function updateTotalPrice() {
+            const priceUnit = getPriceUnit();
+            const quantity = parseFloat(quantityInput.value) || 0;
+            const totalPrice = priceUnit * quantity;
+            totalPriceDisplay.textContent = `Total Price: ${totalPrice.toFixed(2)}`;
+        }
+    
+        // Initial update when the page loads
+        updatePriceUnit();
+    
+        // Update when the selected product changes
+        productSelect.addEventListener('change', updatePriceUnit);
+    
+        // Update when the quantity input changes
+        quantityInput.addEventListener('input', updateTotalPrice);
+    });
+    </script>
+    
+    
+
+<script src="{%static 'assets/js/jquery-3.6.0.min.js'%}"></script>
+
+<script src="{%static 'assets/js/feather.min.js'%}"></script>
+
+<script src="{%static 'assets/js/jquery.slimscroll.min.js'%}"></script>
+
+<script src="{%static 'assets/js/jquery.dataTables.min.js'%}"></script>
+<script src="{%static 'assets/js/dataTables.bootstrap4.min.js'%}"></script>
+
+<script src="{%static 'assets/js/bootstrap.bundle.min.js'%}"></script>
+
+<script src="{%static 'assets/plugins/apexchart/apexcharts.min.js'%}"></script>
+<script src="{%static 'assets/plugins/apexchart/chart-data.js'%}"></script>
+
+<script src="{%static 'assets/js/script.js'%}"></script>
+</body>
+</html>

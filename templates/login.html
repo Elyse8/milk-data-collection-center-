@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="rw">
+{% load static %}
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+<meta name="description" content="POS - Bootstrap Admin Template">
+<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern,  html5, responsive">
+<meta name="author" content="Dreamguys - Bootstrap Admin Template">
+<meta name="robots" content="noindex, nofollow">
+<title>ISHYIRAHAMWE RY'ABAHINZI BA GAHINI (GAFCO)</title>
+
+<link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.jpg' %}">
+<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/all.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body class="account-page">
+
+<div class="main-wrapper">
+    <div class="account-content">
+        <div class="login-wrapper">
+            <div class="login-content">
+                <div class="login-userset">
+                    <div class="login-logo">
+                        <h1 style="color:green;"> GAFCO </h1>
+                    </div>
+                    <div class="login-userheading">
+                        <h3>Kwinjira</h3>
+                        <h4>Mwinjire muri konti yanyu</h4>
+                    </div>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="form-login">
+                            <label>Izina ry'umukoresha</label>
+                            <div class="form-addons">
+                                <input type="text" placeholder="Injiza izina ry'umukoresha" name="username" required>
+                                <img src="{% static 'assets/img/icons/mail.svg' %}" alt="img">
+                            </div>
+                        </div>
+                        <div class="form-login">
+                            <label>Ijambobanga</label>
+                            <div class="pass-group">
+                                <input type="password" class="pass-input" placeholder="Injiza ijambobanga ryawe" name="password" required>
+                                <span class="fas toggle-password fa-eye-slash"></span>
+                            </div>
+                        </div>
+                        <div class="form-login">
+                            <div class="alreadyuser">
+                                <h4><a href="forgetpassword.html" class="hover-a">Wibagiwe ijambobanga?</a></h4>
+                            </div>
+                        </div>
+                        <div class="form-login">
+                            <button class="btn btn-login" type="submit">Injira</button>
+                        </div>
+                        {% if error %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ error }}
+                            </div>
+                        {% endif %}
+                    </form>
+                    <div class="signinform text-center">
+                        {% comment %} <h4>Nta konti ufite? <a href="{% url 'signup' %}" class="hover-a">Iyandikishe</a></h4> {% endcomment %}
+                    </div>
+                    <div class="form-setlogin"></div>
+                    <div class="form-sociallink">
+                        <ul>
+                            <li>
+                                <a href="javascript:void(0);"></a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="login-img">
+                <img src="{% static 'assets/img/logo.jpg' %}" alt="img">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'assets/js/feather.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/js/script.js' %}"></script>
+</body>
+</html>

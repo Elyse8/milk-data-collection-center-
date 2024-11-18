@@ -1,0 +1,13 @@
+<h2>Are you sure you want to delete {{ farmer.first_name }} {{ farmer.last_name }}?</h2>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Yes, delete</button>
+  <a href="{% url 'farmer_list' %}">Cancel</a>  <!-- Adjust the URL name based on your project -->
+</form>
+
+<h2>Are you sure you want to delete {{ product.name }}?</h2>  <!-- Adjust this to display product name or other identifying info -->
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Yes, delete</button>
+  <a href="{% url 'product_list' %}">Cancel</a>  <!-- Adjust the URL name based on your project -->
+</form>

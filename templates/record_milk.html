@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="rw">
+    {% load static %}
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+<meta name="description" content="POS - Bootstrap Admin Template">
+<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, html5, responsive">
+<meta name="author" content="Dreamguys - Bootstrap Admin Template">
+<meta name="robots" content="noindex, nofollow">
+<title>IHURIRO RY'ABOROZI BA GAHINI (GAFCO)</title>
+
+<link rel="shortcut icon" type="{% static 'image/x-icon" href="assets/img/favicon.jpg'%}">
+
+<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css'%}">
+
+<link rel="stylesheet" href="{% static 'assets/css/animate.css'%}">
+
+<link rel="stylesheet" href="{% static 'assets/css/dataTables.bootstrap4.min.css'%}">
+
+<link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/fontawesome.min.css'%}">
+<link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/all.min.css'%}">
+
+<link rel="stylesheet" href="{% static 'assets/css/style.css'%}">
+</head>
+<body>
+<div id="global-loader">
+<div class="whirly-loader"> </div>
+</div>
+
+<div class="main-wrapper">
+
+{% include 'navbar.html'%}
+
+<div class="page-wrapper">
+<div class="content">
+    <div class="container">
+        <h2>Andika Amata</h2>
+        <form action="" method="POST">
+            <!-- CSRF token for security (Django specific) -->
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+            
+            <div class="form-group">
+                <label for="category">Hitamo Umworozi</label>
+                <select class="form-control" id="category" name="category" required>
+                    {% for user in user1 %}
+                    <option value="{{user.id}}">{{user.first_name}} {{user.last_name}}</option>
+                  {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                {% for p in price %}
+                <label for="quantity">Ingano <br> <a style="color:gray;">Igiciro kuri Litiro:{{p.price_unit}}</a></label>
+                <input type="hidden" name="milk_q" value="{{p.price_unit}}">
+                {% endfor %}
+                <input type="number" class="form-control" id="quantity" name="quantity" required>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Itariki</label>
+                <input type="date" class="form-control" id="date" name="date" required>
+            </div>
+
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="want_product" name="want_product" onclick="toggleProductFields()">
+                <label class="form-check-label" for="want_product">Mwifuza ibicuruzwa</label>
+            </div>
+
+            <div id="product_fields" style="display: none;">
+                <div class="form-group">
+                    <label for="product">Hitamo Ibicuruzwa</label>
+                    <select class="form-control" id="product" name="product">
+                        <!-- Assuming 'products' is a context variable containing the list of products -->
+                        {% for product in products %}
+                            <option value="{{ product.id }}">{{ product.product_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="product_quantity">Ubwinshi bw'Ibicuruzwa</label>
+                    <input type="number" class="form-control" id="product_quantity" name="product_quantity">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Ohereza</button>
+        </form>
+    </div>
+</div>
+</div>
+<script>
+    function toggleProductFields() {
+        var checkbox = document.getElementById('want_product');
+        var productFields = document.getElementById('product_fields');
+        if (checkbox.checked) {
+            productFields.style.display = 'block';
+        } else {
+            productFields.style.display = 'none';
+        }
+    }
+</script>
+
+<script src="{% static 'assets/js/jquery-3.6.0.min.js'%}"></script>
+
+<script src="{% static 'assets/js/feather.min.js'%}"></script>
+
+<script src="{% static 'assets/js/jquery.slimscroll.min.js'%}"></script>
+
+<script src="{% static 'assets/js/jquery.dataTables.min.js'%}"></script>
+<script src="{% static 'assets/js/dataTables.bootstrap4.min.js'%}"></script>
+
+<script src="{% static 'assets/js/bootstrap.bundle.min.js'%}"></script>
+
+<script src="{% static 'assets/plugins/apexchart/apexcharts.min.js'%}"></script>
+<script src="{% static 'assets/plugins/apexchart/chart-data.js'%}"></script>
+
+<script src="{% static 'assets/js/script.js'%}"></script>
+</body>
+</html>

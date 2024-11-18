@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+<meta name="description" content="POS - Bootstrap Admin Template">
+<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern,  html5, responsive">
+<meta name="author" content="Dreamguys - Bootstrap Admin Template">
+<meta name="robots" content="noindex, nofollow">
+<title>GAHINI FARMER'S CO-OPERATIVE ( GAFCO)</title>
+
+<link rel="shortcut icon" type="{% static 'image/x-icon" href="assets/img/favicon.jpg'%}">
+
+<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css'%}">
+
+<link rel="stylesheet" href="{% static 'assets/css/animate.css'%}">
+
+<link rel="stylesheet" href="{% static 'assets/css/dataTables.bootstrap4.min.css'%}">
+
+<link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/fontawesome.min.css'%}">
+<link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/all.min.css'%}">
+
+<link rel="stylesheet" href="{% static 'assets/css/style.css'%}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+<div id="global-loader">
+<div class="whirly-loader"> </div>
+</div>
+
+<div class="main-wrapper">
+
+{% include 'navbar.html'%}
+
+<div class="page-wrapper">
+<div class="content">
+<div class="container">
+<h1>Monthly Payment Report for {{ selected_user.first_name }} {{ selected_user.last_name }}</h1>
+<p>Total Income from Milk: {{ payment_record.total_milk_income }}</p>
+<p>Total Product Deduction: {{ payment_record.total_product_deduction }}</p>
+<p>Net Payment: {{ payment_record.net_payment }}</p>
+
+<form action="{%url 'send_report'%}" method="POST">
+    {% csrf_token %}
+<input type="hidden" name="id1" value="{{selected_user.id}}">
+<input type="hidden" name="phone" value="{{selected_user.phone}}">
+<input type="hidden" name="income" value="{{payment_record.total_milk_income}}">
+<input type="hidden" name="net" value="{{payment_record.net_payment}}">
+<input type="hidden" name="deduct" value="{{payment_record.total_product_deduction}}">
+<button type="submit" class="btn btn-primary">Send SMS</button>
+</form>
+</div>
+</div>
+
+
+<script src="{%static 'assets/js/jquery-3.6.0.min.js'%}"></script>
+
+<script src="{%static 'assets/js/feather.min.js'%}"></script>
+
+<script src="{%static 'assets/js/jquery.slimscroll.min.js'%}"></script>
+
+<script src="{%static 'assets/js/jquery.dataTables.min.js'%}"></script>
+<script src="{%static 'assets/js/dataTables.bootstrap4.min.js'%}"></script>
+
+<script src="{%static 'assets/js/bootstrap.bundle.min.js'%}"></script>
+
+<script src="{%static 'assets/plugins/apexchart/apexcharts.min.js'%}"></script>
+<script src="{%static 'assets/plugins/apexchart/chart-data.js'%}"></script>
+
+<script src="{%static 'assets/js/script.js'%}"></script>
+</body>
+</html>

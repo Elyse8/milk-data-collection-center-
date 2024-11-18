@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="rw">
+{% load static %}
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+<meta name="description" content="POS - Bootstrap Admin Template">
+<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, html5, responsive">
+<meta name="author" content="Dreamguys - Bootstrap Admin Template">
+<meta name="robots" content="noindex, nofollow">
+<title>IHURIRO RY'ABOROZI BA GAHINI (GAFCO)</title>
+
+<link rel="shortcut icon" type="{% static 'image/x-icon' %}" href="{% static 'assets/img/favicon.jpg' %}">
+
+<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/dataTables.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/all.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+<div id="global-loader">
+<div class="whirly-loader"></div>
+</div>
+
+<div class="main-wrapper">
+
+{% include 'navbar.html' %}
+
+<div class="page-wrapper">
+<div class="content">
+    <h2>Urutonde rw'Amata</h2>
+    <form id="filter-form" method="GET" action="">
+        <div class="row">
+            <div class="col-md-3">
+                <input type="date" name="date" id="filter-date" class="form-control" placeholder="Shungura itariki">
+            </div>
+            
+            <div class="col-md-3">
+                <select name="farmer" id="filter-farmer" class="form-control">
+                    <option value="">hitamo Umworozi</option>
+                    {% for farmer in farmers %}
+                    <option value="{{ farmer.id }}">{{ farmer.first_name }} {{ farmer.last_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary">Erekana</button>
+            </div>
+            <div class="col-md-3 text-right">
+                <button type="button" id="download-pdf" class="btn btn-secondary">Kuramo PDF</button>
+                <button type="button" id="download-pdf22" class="btn btn-primary">Ohereza SMS</button>
+            </div>
+        </div>
+    </form>
+    <div class="table-responsive mt-4">
+        <table class="table datanew">
+            <thead>
+                <tr>
+                    <th>Itariki</th>
+                    <th>Amazina y'Umworozi</th>
+                    <th>Ubwinshi</th>
+                    <th>Umubare</th>
+                    <th>Umubare w'Ibicuruzwa</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for milk in milk %}
+                <tr>
+                    <td>{{ milk.date1 }}</td>
+                    <td>{{ milk.customuser.first_name }} {{ milk.customuser.last_name }}</td>
+                    <td>{{ milk.quantity }}Ltr</td>
+                    <td>{{ milk.price }}</td>
+                    <td>{{ milk.product_amount }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'assets/js/feather.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery.slimscroll.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'assets/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/plugins/apexchart/apexcharts.min.js' %}"></script>
+<script src="{% static 'assets/plugins/apexchart/chart-data.js' %}"></script>
+<script src="{% static 'assets/js/script.js' %}"></script>
+
+<script>
+    document.getElementById('download-pdf').addEventListener('click', function() {
+        var date = document.getElementById('filter-date').value;
+        var farmer = document.getElementById('filter-farmer').value;
+        var url = new URL(window.location.href);
+        url.pathname = '/report1/';  // Hindura na URL yawe ya Django yo gukora PDFs
+
+        if (date) {
+            url.searchParams.set('date', date);
+        }
+        if (farmer) {
+            url.searchParams.set('farmer', farmer);
+        }
+        url.searchParams.set('download', 'pdf');
+
+        window.location.href = url.toString();
+    });
+</script>
+</body>
+</html>

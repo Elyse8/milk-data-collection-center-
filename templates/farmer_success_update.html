@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script>
+            // Show a success message with SweetAlert
+            Swal.fire({
+                title: 'Success!',
+                text: 'Farmer Updated Successfully!',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                // Redirect to the specified URL
+                if (result.isConfirmed) {
+                    window.location.href = '/farmers';
+                }
+            });
+        </script>
+        
+        <script src="" async defer></script>
+    </body>
+</html>
